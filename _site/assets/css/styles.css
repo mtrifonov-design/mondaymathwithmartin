@@ -1,3 +1,5 @@
 .current { color: green; }
 
-.globalstyle { margin: 25px; background-color: white; }
+.globalstyle { margin: 25px; background-color: white; font: 22px serif; color: #383b51; font-family: sans-serif; }
+
+.accent { font-family: 'Playfair Display', serif; }
