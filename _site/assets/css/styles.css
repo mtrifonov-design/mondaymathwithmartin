@@ -9,3 +9,5 @@
 .reading { line-height: 1.5; font-size: 24px; }
 
 .postlist { background-color: rgba(221, 242, 228, 0.5); list-style-type: none; box-sizing: border-box; padding: 10px; border-radius: 10px; margin-bottom: 20px; }
+
+.definition { background-color: #d5ccf4; }

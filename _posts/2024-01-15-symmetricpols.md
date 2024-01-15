@@ -14,6 +14,7 @@ Before we dive into the fundamental theorem on symmetric polynomials, let's firs
 
 >**Definition.** A polynomial $f(x_1,...,x_n)$ is called _symmetric_ if no permutation of the variables $x_1,...,x_n$ changes its value.
 
+
 Consider, for example, polynomials in the variables $a,b$. The only possible way to permute the variables $a,b$ is to swap $a$ and $b$. The polynomial $a+b$ is _symmetric_, because when you swap $a,b$, you get $b+a$, and $a+b = b+a$. The polynomial $a-b$ is _not symmetric_, because when you swap $a,b$, you get $b-a$, and $a-b \neq b-a$.  
 
 Let's now consider polynomials in 3 variables, $a,b,c$. A very important class of symmetric polynomials are the "elementary symmetric polynomials" in 3 variables, listed below:  
@@ -23,22 +24,24 @@ $$\begin{align}&a+b+c
 \\& abc\end{align}$$
 
 In general, you can obtain the "elementary symmetric polynomials" in $n$ variables by the following recursive definition:
-> Let $\tau_1,...,\tau_{n-1}$ be the elementary symmetric polynomials in $n-1$ variables $x_1,...,x_{n-1}$. The elementary symmetric polynomials in $n$ variables, let's denote them $\sigma_1,...,\sigma_n$ are constructed as   
+> **Definition.** Let $\tau_1,...,\tau_{n-1}$ be the elementary symmetric polynomials in $n-1$ variables $x_1,...,x_{n-1}$. The elementary symmetric polynomials in $n$ variables, let's denote them $\sigma_1,...,\sigma_n$ are constructed as   
 
 $$\begin{align}\sigma_1 &= \tau_1 + x_n
 \\\sigma_2 &= \tau_2 + x_n\tau_1
 \\\vdots
 \\\sigma_n &= 0 + x_n\tau_n\end{align}$$
 
-> **Follow along:** Using the above definition, construct the elementary symmetric polynomials in 4 variables
+**Follow along:** Using the above definition, construct the elementary symmetric polynomials in 4 variables
 
 Now that we're comfortable with the notion of symmetric polynomials, we can state the fundamental theorem
-> **Fundamental theorem on symmetric polynomials**  
+> **Fundamental theorem on symmetric polynomials** 
 There exists an algorithm that rewrites any symmetric polynomial in $n$ variables $x_1,...,x_n$ as a polynomial in the elementary symmetric polynomials in $n$ variables
+
+
 
 For example, the symmetric polynomial $a^2+b^2$ in 2 variables can be rewritten as $(\sigma_1)^2-2(\sigma_2)$, where $\sigma_1 = (a+b),\sigma_2 = (ab)$ are the elementary symmetric polynomials in 2 variables.
 
-> **Pause for a second** Is this suprising to you? Can you see a straightforward way to express the polynomial $a^3+b^3+c^3$ in terms of the elementary symmetric polynomials in 3 variables?
+**Pause for a second:** Is this suprising to you? Can you see a straightforward way to express the polynomial $a^3+b^3+c^3$ in terms of the elementary symmetric polynomials in 3 variables?
 
 ## The algorithm
 

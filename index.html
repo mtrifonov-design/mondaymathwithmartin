@@ -11,7 +11,7 @@ I'm Martin, it's Monday, and this is math.
   {% for post in site.posts %}
     <li class="postlist">
       <h3 class="accent"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-      Monday, {{ post.date | date_to_string }},{{ post.excerpt }}
+      Monday, {{ post.date | date_to_string }}.{{ post.excerpt }}
     </li>
   {% endfor %}
 </ul>
