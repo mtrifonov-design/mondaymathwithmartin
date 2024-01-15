@@ -1,60 +1,96 @@
 ---
 layout: post
 author: Martin Trifonov
+title: Symmetric Polynomials (pt. 1)
 ---
-Hi, It's Monday, I'm Martin, and this is math.  
-Today's theorem is called the **fundamental theorem on symmetric polynomials**. I first encountered this theorem in my attempt to retrace the historical development of Galois theory, where it kept making appearances in various proofs. My gut tells me its an important theorem, so I want to show it to you. 
+ 
+## Dear Mr Gauss, 
+Today's theorem is called the **fundamental theorem on symmetric polynomials**. It's a rather chunky theorem, so we might take another week or two to fully finish it. I first encountered this theorem in my attempt to retrace the historical development of Galois theory, where it kept making appearances in various proofs. My gut tells me its an important theorem, so I would love to show it to you. 
 
 Okay, enough babbling, lets go meet our theorem.
 
-### Meet the theorem
-Let $f(x) = x^n+c_{n-1}x^{n-1}+...+c_0 = 0$ be some rational equation, and let $\alpha_1,..,\alpha_n \in \mathbb C$ be its roots.
-At its core, todays theorem is concerned with relating the roots of our polynomial with its coefficients.
+## Meet the theorem
+Before we dive into the fundamental theorem on symmetric polynomials, let's first get comfortable of _symmetric polynomials_.    
 
-Before we spell out the exact statement of the theorem, let's make the following innocent observation. Instead of writing  $f(x) = x^n+c_{n-1}x^{n-1}+...+c_0$, we could factorise it as $f(x)=(x-\alpha_1)...(x-\alpha_n)$. If we now were to expand the latter expression, we would get $f(x) = x^n-(\alpha_1+...+\alpha_n)x^{n-1}+...+(-1)^n\alpha_1...\alpha_n$.
-This allows us to capture the following relations between roots $\alpha_1,...,\alpha_n$ and coefficients $c_{n-1},...,c_0$:
-$$\alpha_1+...+\alpha_n = -c_{n-1}\\\vdots\\\alpha_1\cdots\alpha_n =(-1)^nc_0$$
-Thus, even though the roots of our equation might not be known to us, at the very least, we know they satisfy the above constraints. The left-hand-sides of the above identities are called the _elementary symmetric polynomials_ in $\alpha_1,...,\alpha_n$. By symmetric, it is meant that we could permute the roots in the expression in any way whatsoever, and the algebraic value of the expression will not change.
+>**Definition.** A polynomial $f(x_1,...,x_n)$ is called _symmetric_ if no permutation of the variables $x_1,...,x_n$ changes its value.
 
-Today's theorem builds right on top on these observations. The juiciest way to present it is the following:
-> Let $f(x) = x^n+c_{n-1}x^{n-1}+...+c_0 = 0$ be some equation, and let $\alpha_1,..,\alpha_n$ be its roots.  Any _symmetric_ polynomial $g(\alpha_1,...,\alpha_n)$ in the roots can be converted into a polynomial $h(c_0,...,c_{n-1})$ in the coefficients by a simple algorithm, so that $g(\alpha_1,...,\alpha_n) = h(c_0,...,c_{n-1})$   
+Consider, for example, polynomials in the variables $a,b$. The only possible way to permute the variables $a,b$ is to swap $a$ and $b$. The polynomial $a+b$ is _symmetric_, because when you swap $a,b$, you get $b+a$, and $a+b = b+a$. The polynomial $a-b$ is _not symmetric_, because when you swap $a,b$, you get $b-a$, and $a-b \neq b-a$.  
 
-We already gave an obvious example of the theorem. The polynomial $\alpha_1+...+\alpha_n$ is symmetric in the roots of our equation (no permutation of the roots changes its value), and it can be expressed as a polynomial $-c_{n-1}$ (albeit, a very stupid one) in the coefficients of the equation. The theorem goes much further though. I could come up with some other expression in the roots of our equation, say $\alpha_1^5+...+\alpha_n^5$, and this value must also be expressible as some rational combination of our coefficients.
+Let's now consider polynomials in 3 variables, $a,b,c$. A very important class of symmetric polynomials are the "elementary symmetric polynomials" in 3 variables, listed below:  
 
-**Let's make it super concrete**. Suppose my equation is $5x^3-2x+1$. It's roots, $\alpha_1,..,\alpha_3$, real or complex, whatever they are, are not known to me. However, by means of an algorithm we're about to describe, we will be able to determine the exact value of the expression $(\alpha_1^2+\alpha_2^2+\alpha_3^2)(\alpha_1\alpha_2+\alpha_1\alpha_3+\alpha_2\alpha_3)$ as a rational expression in the coefficients $5,-2,1$.
-### The algorithm
-### Newtons Theorem
-### Properties of symmetric polynomials
-Let's investigate the nature of symmetric polynomials. 
-Supose we start with any polynomial $f(x_1,...,x_n)$. For simple polynomials, it is easy to determine if they are symmetric at a glance. 
-$$2x^2+2y^2+2z^2 \in \mathbb Q[x,y,z] \text{ is symmetric}$$
-But what about more complicated expressions?
-$$2xy^3(x^2+z)(y+x^2)$$
-Let's consider the following algorithm to determine the symmetry of polynomials:
->1. Fully expand out your given polynomial, so that it is written as sum of monomials. Example:  
-$2xy^3(x^2+z)(y+x^2)=2 x^5 y^3 + 2 x^3 y^4 + 2 x^3 y^3 z + 2 x y^4 z$
->2. For the first monomial in your expression, say $x^5y^3 = x^5y^3z^0$, generate all distinct monomials that can be obtained by permuting the variables, in this case:  
-$x^5y^3z^0,x^5z^3y^0,y^5x^3z^0,y^5z^3y^0,z^5x^3y^0,z^5y^3x^0$  
-If all monomials exist in the expression and share the same coefficients, then cross them of from the expression and repeat step 2. If some monomial doesn't exist, or if two monomials have different coefficients, the polynomial isn't symmetric.     
+$$\begin{align}&a+b+c
+\\& ab+bc+ac
+\\& abc\end{align}$$
 
+In general, you can obtain the "elementary symmetric polynomials" in $n$ variables by the following recursive definition:
+> Let $\tau_1,...,\tau_{n-1}$ be the elementary symmetric polynomials in $n-1$ variables $x_1,...,x_{n-1}$. The elementary symmetric polynomials in $n$ variables, let's denote them $\sigma_1,...,\sigma_n$ are constructed as   
 
-The important takeaway here is that monomials can be grouped together in the specified way. They are, in some sense, the building blocks of symmetric polynomials. We can identify these building blocks in the following way:
-5-3-0 shall denote the symmetric polynomial 
-$$x^5y^3z^0+x^5z^3y^0+y^5x^3z^0+y^5z^3y^0+z^5x^3y^0+z^5y^3x^0$$
-whereas 1-0-0 denotes
-$$x+y+z$$
-The elementary symmetric polynomials are exactly 1-0-0,1-1-0,1-1-1.
-Now there is a slightly larger class of symmetric polynomials generated by the elementary symmetric polynomials, which we will show now: 
+$$\begin{align}\sigma_1 &= \tau_1 + x_n
+\\\sigma_2 &= \tau_2 + x_n\tau_1
+\\\vdots
+\\\sigma_n &= 0 + x_n\tau_n\end{align}$$
 
+> **Follow along:** Using the above definition, construct the elementary symmetric polynomials in 4 variables
 
-### Newtons Theorem
->The symmetric polynomials of the form
->$$s_k =\alpha_1^k+\alpha_2^k+...+\alpha_n^k$$
->can be expressed in terms of the elementary symmetric polynomials $\sigma_1,...,\sigma_n$.
-___
-Proof.  
-The polynomials $s_k$ are exactly those described by k-0-0.
-There is a natural law here, which says:
-(k-1-0)()
-### The general proof
-### Outlook
+Now that we're comfortable with the notion of symmetric polynomials, we can state the fundamental theorem
+> **Fundamental theorem on symmetric polynomials**  
+There exists an algorithm that rewrites any symmetric polynomial in $n$ variables $x_1,...,x_n$ as a polynomial in the elementary symmetric polynomials in $n$ variables
+
+For example, the symmetric polynomial $a^2+b^2$ in 2 variables can be rewritten as $(\sigma_1)^2-2(\sigma_2)$, where $\sigma_1 = (a+b),\sigma_2 = (ab)$ are the elementary symmetric polynomials in 2 variables.
+
+> **Pause for a second** Is this suprising to you? Can you see a straightforward way to express the polynomial $a^3+b^3+c^3$ in terms of the elementary symmetric polynomials in 3 variables?
+
+## The algorithm
+
+Let $f(x_1,...,x_n)$ be a symmetric polynomial in $n$ variables. We will describe a procedure by which you can rewrite $f$ as a polynomial $g(\sigma_1,...,\sigma_n)$ in the elementary symmetric polynomials in $n$ variables.
+
+As we go along, we will be using the following example polynomial: $f(a,b,c) = a^3bc+b^3ac+c^3ab$.
+1. If the number of variables in our polynomial is 1, then return the polynomial as it is. Otherwise, continue with step 2. (This is the base case for the recursion used in step 3.) 
+2. Pick a variable of your choice, like $c$ and rearrange your expression as a polynomial in this variable. We write $(a^3b+b^3a)c+(ab)c^3$
+3. Recursively rewrite each of the coefficients, which are now symmetric polynomials in 2 variables, as polynomials in the elementary symmetric polynomials in 2 variables. In terms of our example, you get an expression of the form:  
+$Q_1(\tau_1,\tau_2)c+Q_2(\tau_1,\tau_2)c^3$, where $Q_i(\tau_1,\tau_2)$ are the coefficients rewritten in terms of the elementary symmetric polynomials in 2 variables. 
+4. Observe that the recursive definition of elementary symmetric polynomials allows us to obtain the following relations:  
+$$\begin{align}\tau_1& = \sigma_1-c\\
+\tau_2 &= \sigma_2 - c\tau_1 = \sigma_2-\sigma_1c+c^2
+\\
+0 &=\sigma_3-c\tau_{2}=\sigma_3-c\sigma_{2}+c^2\sigma_{1}-c^3\end{align}$$  
+Using the first two relations, substitute $\tau_1$ for $\sigma_1-c$ and $\tau_2$ for $\sigma_2-\sigma_1c+c^2$ in both $Q_1,Q_2$.
+5. Rearrange the expression as a polynomial in $c$. If necessary, use relation (3) from step 3 to reduce its degree.  Verify that after simplifying you are left with a polynomial in the elementary symmetric polynomials. 
+
+To make sure we know what's going on, let's simulate a proper run of this algorithm.
+
+## A demonstration
+
+We start with $f(a,b,c) = a^3bc+b^3ac+c^3ab$. 
+
+**Step 1**. We rewrite our expression as $(a^3b+b^3a)c+(ab)c^3$.
+
+**Step 2**. Here, the algorithm relies on the magic of recursion to find an expression of the coefficients $(a^3b+b^3a),(ab)$ in terms of the elementary symmetric polynomials in $a,b$, namely $\tau_1 = a+b,\tau_2 = ab$.  
+One of our coefficients is already in this form, since $(ab) =\tau_2$. To figure out the expression of the second coefficient, $a^3b+b^3a$, we must step into a recursive call. However, that seems like a rather tedious thing to do, so we will skip forward to the result of the call:
+$a^3b+b^3a = \tau_1^2\tau_2-2\tau_2^2$
+
+**Step 3**. Now we construct the relations between the elementary symmetric polynomials in $a,b$: $\tau_1,\tau_2$ and the elementary symmetric polynomials in $a,b,c$: $\sigma_1,\sigma_2,\sigma_3$
+
+$$\begin{align}
+\tau_1 &= \sigma_1-c\\
+\tau_2 &= \sigma_2-\sigma_1c+c^2\\
+0 &=\sigma_3-\sigma_2c+\sigma_1c^2-c^3\\
+\end{align}$$
+
+Now we substitute these identities in our expression $(\tau_1^2\tau_2-2\tau_2^2)c+(\tau_2)c^3$ and obtain
+$$c^{3} (\sigma_1^{2} - 2 \sigma_2) + c^{2} (- \sigma_1^{3} + 2 \sigma_1 \sigma_2) + c (\sigma_1^{2} \sigma_2 - 2 \sigma_2^{2})$$
+Now divide by the polynomial in the third relation, $\sigma_3-\sigma_2c+\sigma_1c^2-c^3$ and obtain:
+$$\sigma_1^{2} \sigma_3 - 2 \sigma_2 \sigma_3$$
+> **Follow along:** Verify that indeed  
+$\sigma_1^{2} \sigma_3 - 2 \sigma_2 \sigma_3 = a^3bc+b^3ac+c^3ab$. When preparing this post, I ran the calculations through the computer, as they can get quite tedious. However, this last step, I did by hand, and I was positively charmed by the magic of this algorithm.
+> **Challenge:** Express the polynomial $a^3+b^3+c^3$ in terms of the elementary symmetric polynomials. 
+
+## Magic? 
+
+The magic in this theorem happens in the third step. After the polynomial division, all terms that contain $c$ vanish. Why does this happen?  
+
+Stay tuned, as we verify the correctness of todays algorithm next Monday!
+
+## References / Literature / Further reading
+
+I am working with the book "Galois theory" by "Harold M. Edwards". Pages 8-13 contain the fundamental theorem on symmetric polynomials. My interpretation follows the text closely.

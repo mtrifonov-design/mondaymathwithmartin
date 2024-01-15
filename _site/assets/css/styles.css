@@ -3,3 +3,9 @@
 .globalstyle { margin: 25px; background-color: white; font: 22px serif; color: #383b51; font-family: sans-serif; }
 
 .accent { font-family: 'Playfair Display', serif; }
+
+.contentbox { margin: auto; color: #383b51; max-width: 800px; }
+
+.reading { line-height: 1.5; font-size: 24px; }
+
+.postlist { background-color: rgba(221, 242, 228, 0.5); list-style-type: none; box-sizing: border-box; padding: 10px; border-radius: 10px; margin-bottom: 20px; }

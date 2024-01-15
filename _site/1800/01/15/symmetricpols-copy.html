@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Symmetricpols copy</title>
+    <link rel="stylesheet" href="/mondaymathwithmartin/assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <script>
+      MathJax = {
+        tex: {
+          displayMath: [           
+            ['$$', '$$'],
+            ['\\[', '\\]']
+          ],
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+
+        },
+        svg: {
+          fontCache: 'global'
+        }
+      };
+      </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body class="globalstyle">
+
+    <div class="contentbox">
+      <nav>
+    
+      <a href="/mondaymathwithmartin/" >Home</a>
+    
+      <a href="/mondaymathwithmartin/about.html" >About</a>
+    
+  </nav>
+      <h3 class="accent">Monday Math <i>with</i> Martin</h3>I'm Martin, it's Monday, and this is math.
+<hr>
+<h1>Symmetricpols copy</h1>
+<p>15 Jan 1800 - Martin Trifonov</p>
+<div class="reading">
+    <p>Hi, It’s Monday, I’m Martin, and this is math.<br />
+Today’s theorem is called the <strong>fundamental theorem on symmetric polynomials</strong>. I first encountered this theorem in my attempt to retrace the historical development of Galois theory, where it kept making appearances in various proofs. My gut tells me its an important theorem, so I want to show it to you.</p>
+
+<p>Okay, enough babbling, lets go meet our theorem.</p>
+
+<h3 id="meet-the-theorem">Meet the theorem</h3>
+<p>Let’s start with something super concrete. Consider, for example, the following polynomial $f(x) = x^{5}+2x^{4}-2x^{3}+4x-5$. We know that over the complex numbers, this polynomial will have $5$ roots, let’s call them $\alpha_1,..,\alpha_5$.</p>
+
+<p>Now, the value of these roots is not directly accessible to us. Unlike quadratic polynomials, there doesn’t exist a generic formula for solving polynomials of degree $5$ where we could just plug in our coefficients.</p>
+
+<p>However, whilst we can’t always know the roots directly, it turns out that we can always find the value of certain expressions <em>in the roots</em>. For example, consider the expression $\alpha_1^3+\alpha_2^3+\alpha_3^3+\alpha_4^3+\alpha_5^3$. We will show how we can derive the value of this expression using only the coefficients $2,-2,0,4,-5$ of our polynomial $f(x)$.</p>
+
+<p>The reason we will be able to evaluate $\alpha_1^3+\alpha_2^3+\alpha_3^3+\alpha_4^3+\alpha_5^3$  is because this expression is said to be <em>symmetric</em>, by which we mean that we could apply any permutation of the roots $\alpha_1,…,\alpha_5$ to it, and its value will not change. For example, if we swap all occurences of $\alpha_1$ with $\alpha_3$ (this is a  permutation of the roots), we obtain the new expression $\alpha_3^3+\alpha_2^3+\alpha_1^3+\alpha_4^3+\alpha_5^3$, which has equal value to the original expression.</p>
+
+<p>The juiciest way to state the <strong>fundamental theorem on symmetric polynomials</strong> is the following:</p>
+<blockquote>
+  <p>There exists an algorithm, by which we can express symmetric polynomials in the roots of an equation $\alpha_1,…,\alpha_n$ in terms of the coefficients of the equation $c_0,…,c_{n-1}$</p>
+</blockquote>
+
+<p>That’s the flashy way to introduce the theorem. However, a more general statement, that makes no reference to “roots of an equation”, is the following:</p>
+
+<blockquote>
+  <p>There exists an algorithm by which we can express symmetric polynomials in $x_1,…,x_n$ in terms of the elementary symmetric polynomials $\sigma_1,…,\sigma_n$ in $n$ variables.</p>
+</blockquote>
+
+<p>This warrants a little explanation on what “elementary symmetric polynomials in $n$ variables” might be. For this, observe that we can factorise our polynomial $f(x)$ as $(x-\alpha_1)(x-\alpha_2)…(x-\alpha_5)$, and the value of this equals $x^5+2x^4-2x^3+4x-5$. If you expand out the former expression, you obtain $f(x) = x^5-(\alpha_1+\alpha_2+…+\alpha_5)x^4+…-(\alpha_1\alpha_2…\alpha_5)$. The expressions 
+\(\alpha_1+\alpha_2+\alpha_3+\alpha_4+\alpha_5 \\
+\alpha_1\alpha_2+\alpha_1\alpha_3+...\\\vdots\\\alpha_1\alpha_2\alpha_3\alpha_4\alpha_5\)
+are called the “elementary symmetric polynomials in $\alpha_1,…,\alpha_5$”, and they are equal to our coefficents (with an occasional minus sign).</p>
+
+<p>The fundamental theorem, in full generality, says that symmetric polynomials can be expressed in terms of elementary symmetric polynomials. When working with equations, this implies that you can express symmetric polynomials in terms of the coefficients.</p>
+
+<h3 id="the-algorithm">The algorithm</h3>
+
+<h3 id="newtons-theorem">Newtons Theorem</h3>
+<h3 id="properties-of-symmetric-polynomials">Properties of symmetric polynomials</h3>
+<p>Let’s investigate the nature of symmetric polynomials. 
+Supose we start with any polynomial $f(x_1,…,x_n)$. For simple polynomials, it is easy to determine if they are symmetric at a glance. 
+\(2x^2+2y^2+2z^2 \in \mathbb Q[x,y,z] \text{ is symmetric}\)
+But what about more complicated expressions?
+\(2xy^3(x^2+z)(y+x^2)\)
+Let’s consider the following algorithm to determine the symmetry of polynomials:</p>
+<blockquote>
+  <ol>
+    <li>Fully expand out your given polynomial, so that it is written as sum of monomials. Example:<br />
+$2xy^3(x^2+z)(y+x^2)=2 x^5 y^3 + 2 x^3 y^4 + 2 x^3 y^3 z + 2 x y^4 z$</li>
+    <li>For the first monomial in your expression, say $x^5y^3 = x^5y^3z^0$, generate all distinct monomials that can be obtained by permuting the variables, in this case:<br />
+$x^5y^3z^0,x^5z^3y^0,y^5x^3z^0,y^5z^3y^0,z^5x^3y^0,z^5y^3x^0$<br />
+If all monomials exist in the expression and share the same coefficients, then cross them of from the expression and repeat step 2. If some monomial doesn’t exist, or if two monomials have different coefficients, the polynomial isn’t symmetric.</li>
+  </ol>
+</blockquote>
+
+<p>The important takeaway here is that monomials can be grouped together in the specified way. They are, in some sense, the building blocks of symmetric polynomials. We can identify these building blocks in the following way:
+5-3-0 shall denote the symmetric polynomial 
+\(x^5y^3z^0+x^5z^3y^0+y^5x^3z^0+y^5z^3y^0+z^5x^3y^0+z^5y^3x^0\)
+whereas 1-0-0 denotes
+\(x+y+z\)
+The elementary symmetric polynomials are exactly 1-0-0,1-1-0,1-1-1.
+Now there is a slightly larger class of symmetric polynomials generated by the elementary symmetric polynomials, which we will show now:</p>
+
+<h3 id="newtons-theorem-1">Newtons Theorem</h3>
+<blockquote>
+  <p>The symmetric polynomials of the form
+\(s_k =\alpha_1^k+\alpha_2^k+...+\alpha_n^k\)
+can be expressed in terms of the elementary symmetric polynomials $\sigma_1,…,\sigma_n$.
+___
+Proof.<br />
+The polynomials $s_k$ are exactly those described by k-0-0.
+There is a natural law here, which says:
+(k-1-0)()</p>
+  <h3 id="the-general-proof">The general proof</h3>
+  <h3 id="outlook">Outlook</h3>
+</blockquote>
+
+</div>
+
+
+
+    </div>
+
+  </body>
+</html>

@@ -4,14 +4,14 @@ title: Home
 ---
 <h1 class="accent">Monday Math <i>with</i> Martin</h1>
 I'm Martin, it's Monday, and this is math.
-
+<hr>
 <h3 >Posts</h3>
 
-<ul>
+<ul style="padding:0;margin:0">
   {% for post in site.posts %}
-    <li>
+    <li class="postlist">
       <h3 class="accent"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-      {{ post.excerpt }}
+      Monday, {{ post.date | date_to_string }},{{ post.excerpt }}
     </li>
   {% endfor %}
 </ul>
