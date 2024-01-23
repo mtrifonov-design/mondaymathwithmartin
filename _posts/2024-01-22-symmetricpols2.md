@@ -57,9 +57,15 @@ If $g(Y)$ is non-zero, and $x_1,..,x_n$ are all roots, this implies that $(Y-x_1
 The punchline of the correctness proof above underlies a simple setup. We constructed a polynomial with "symmetric coefficients" (the coefficients being symmetric polynomials in $x_1,...,x_n$), that has $x_k$ as a root for some $k \le n$. Whenever we have such a situation, we can immediately infer that the constructed polynomial has degree at least $n$ if it isn't the zero polynomial (**why?**). 
 
 There is a natural way to generalise this setup and peek into some of the ideas underlying Galois theory. Suppose you have some polynomial $f(Y)$ with symmetric coefficients. Now, suppose it has $r(x_1,...,x_n)$ as a root, where $r$ is some polynomial (not necessarily symmetric). In other words:
-$$s_mr^m+...+s_0 = 0$$
+
+$$\begin{align}s_mr^m+...+s_0 = 0\end{align}$$
+
 Then any permutation of the $n$ variables keeps the coefficients of the above polynomial constant, but possibly changes $r$ into another root of the same polynomial.  
-Now if we call $r_1,...,r_k$ all the distinct polynomials we can obtain by applying any permutation to $r$, we know that $r_1,...,r_k$ must all be roots of the polynomial $$s_mY^m+...+s_0 = 0$$
+Now if we call $r_1,...,r_k$ all the distinct polynomials we can obtain by applying any permutation to $r$, we know that $r_1,...,r_k$ must all be roots of the polynomial 
+
+$$\begin{align}s_mY^m+...+s_0 = 0\end{align}$$
+
+
 Then, by the same logic as before, this implies that $m \ge k$.   
 In some sense we can think of the number $k$ as a measure of how "asymmetric" the root $r$ is. In the case $r = x_n$, we have $k = n$. Once we start thinking of symmetry as a spectrum, not a binary state, we make a productive leap that launches us into Galois theory.
 
