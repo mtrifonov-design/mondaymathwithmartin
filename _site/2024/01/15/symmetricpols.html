@@ -34,7 +34,7 @@
     
       <a href="/mondaymathwithmartin/about.html" >About</a>
     
-  </nav>
+</nav>
       <h3 class="accent">Monday Math <i>with</i> Martin</h3>I'm Martin, it's Monday, and this is math.
 <hr>
 <h1>Symmetric Polynomials (pt. 1)</h1>
@@ -46,7 +46,7 @@
 <p>Okay, enough babbling, lets go meet our theorem.</p>
 
 <h2 id="meet-the-theorem">Meet the theorem</h2>
-<p>Before we dive into the fundamental theorem on symmetric polynomials, let’s first get comfortable of <em>symmetric polynomials</em>.</p>
+<p>Before we dive into the fundamental theorem on symmetric polynomials, let’s first get comfortable with <em>symmetric polynomials</em>.</p>
 
 <blockquote>
   <p><strong>Definition.</strong> A polynomial $f(x_1,…,x_n)$ is called <em>symmetric</em> if no permutation of the variables $x_1,…,x_n$ changes its value.</p>
@@ -78,7 +78,7 @@
 There exists an algorithm that rewrites any symmetric polynomial in $n$ variables $x_1,…,x_n$ as a polynomial in the elementary symmetric polynomials in $n$ variables</p>
 </blockquote>
 
-<p>For example, the symmetric polynomial $a^2+b^2$ in 2 variables can be rewritten as $(\sigma_1)^2-2(\sigma_2)$, where $\sigma_1 = (a+b),\sigma_2 = (ab)$ are the elementary symmetric polynomials in 2 variables.</p>
+<p>For example, the symmetric polynomial $a^2+b^2$ in 2 variables can be rewritten as $\sigma_1^2-2\sigma_2$, where $\sigma_1 = a+b,\sigma_2 = ab$ are the elementary symmetric polynomials in 2 variables.</p>
 
 <p><strong>Pause for a second:</strong> Is this suprising to you? Can you see a straightforward way to express the polynomial $a^3+b^3+c^3$ in terms of the elementary symmetric polynomials in 3 variables?</p>
 
@@ -88,17 +88,17 @@ There exists an algorithm that rewrites any symmetric polynomial in $n$ variable
 
 <p>As we go along, we will be using the following example polynomial: $f(a,b,c) = a^3bc+b^3ac+c^3ab$.</p>
 <ol>
-  <li>If the number of variables in our polynomial is 1, then return the polynomial as it is. Otherwise, continue with step 2. (This is the base case for the recursion used in step 3.)</li>
-  <li>Pick a variable of your choice, like $c$ and rearrange your expression as a polynomial in this variable. We write $(a^3b+b^3a)c+(ab)c^3$</li>
-  <li>Recursively rewrite each of the coefficients, which are now symmetric polynomials in 2 variables, as polynomials in the elementary symmetric polynomials in 2 variables. In terms of our example, you get an expression of the form:<br />
+  <li><strong>Base case</strong>. If the number of variables in our polynomial is 1, then return the polynomial as it is. Otherwise, continue with step 2.</li>
+  <li><strong>Variable selection and rearrangement</strong>. Pick a variable of your choice, like $c$ and rearrange your expression as a polynomial in this variable. We write $(a^3b+b^3a)c+(ab)c^3$</li>
+  <li><strong>Recursive rewriting</strong>. Recursively rewrite each of the coefficients, which are now symmetric polynomials in 2 variables, as polynomials in the elementary symmetric polynomials in 2 variables. In terms of our example, you get an expression of the form:<br />
 $Q_1(\tau_1,\tau_2)c+Q_2(\tau_1,\tau_2)c^3$, where $Q_i(\tau_1,\tau_2)$ are the coefficients rewritten in terms of the elementary symmetric polynomials in 2 variables.</li>
-  <li>Observe that the recursive definition of elementary symmetric polynomials allows us to obtain the following relations:<br />
+  <li><strong>Substitution and rearragenement</strong>. Observe that the recursive definition of elementary symmetric polynomials allows us to obtain the following relations:<br />
 \(\begin{align}\tau_1&amp; = \sigma_1-c\\
 \tau_2 &amp;= \sigma_2 - c\tau_1 = \sigma_2-\sigma_1c+c^2
 \\
 0 &amp;=\sigma_3-c\tau_{2}=\sigma_3-c\sigma_{2}+c^2\sigma_{1}-c^3\end{align}\)<br />
-Using the first two relations, substitute $\tau_1$ for $\sigma_1-c$ and $\tau_2$ for $\sigma_2-\sigma_1c+c^2$ in both $Q_1,Q_2$.</li>
-  <li>Rearrange the expression as a polynomial in $c$. If necessary, use relation (3) from step 3 to reduce its degree.  Verify that after simplifying you are left with a polynomial in the elementary symmetric polynomials.</li>
+Using the first two relations, substitute $\tau_1$ for $\sigma_1-c$ and $\tau_2$ for $\sigma_2-\sigma_1c+c^2$ in both $Q_1,Q_2$. Rearrange the expression as a polynomial in $c$.</li>
+  <li><strong>Division and remainder</strong>. Divide your resultant polynomial by the polynomial in the righthandside of relation (3) from the previous step, and return the remainder of this operation.</li>
 </ol>
 
 <p>To make sure we know what’s going on, let’s simulate a proper run of this algorithm.</p>
@@ -107,13 +107,15 @@ Using the first two relations, substitute $\tau_1$ for $\sigma_1-c$ and $\tau_2$
 
 <p>We start with $f(a,b,c) = a^3bc+b^3ac+c^3ab$.</p>
 
-<p><strong>Step 1</strong>. We rewrite our expression as $(a^3b+b^3a)c+(ab)c^3$.</p>
+<p><strong>Step 1</strong>. Our polynomial contains more than one variable, so we continue to step 2.</p>
 
-<p><strong>Step 2</strong>. Here, the algorithm relies on the magic of recursion to find an expression of the coefficients $(a^3b+b^3a),(ab)$ in terms of the elementary symmetric polynomials in $a,b$, namely $\tau_1 = a+b,\tau_2 = ab$.<br />
+<p><strong>Step 2</strong>. We rewrite our expression as $(a^3b+b^3a)c+(ab)c^3$.</p>
+
+<p><strong>Step 3</strong>. Here, the algorithm relies on the magic of recursion to find an expression of the coefficients $(a^3b+b^3a),(ab)$ in terms of the elementary symmetric polynomials in $a,b$, namely $\tau_1 = a+b,\tau_2 = ab$.<br />
 One of our coefficients is already in this form, since $(ab) =\tau_2$. To figure out the expression of the second coefficient, $a^3b+b^3a$, we must step into a recursive call. However, that seems like a rather tedious thing to do, so we will skip forward to the result of the call:
 $a^3b+b^3a = \tau_1^2\tau_2-2\tau_2^2$</p>
 
-<p><strong>Step 3</strong>. Now we construct the relations between the elementary symmetric polynomials in $a,b$: $\tau_1,\tau_2$ and the elementary symmetric polynomials in $a,b,c$: $\sigma_1,\sigma_2,\sigma_3$</p>
+<p><strong>Step 4</strong>. Now we construct the relations between the elementary symmetric polynomials in $a,b$: $\tau_1,\tau_2$ and the elementary symmetric polynomials in $a,b,c$: $\sigma_1,\sigma_2,\sigma_3$</p>
 
 \[\begin{align}
 \tau_1 &amp;= \sigma_1-c\\
@@ -122,8 +124,10 @@ $a^3b+b^3a = \tau_1^2\tau_2-2\tau_2^2$</p>
 \end{align}\]
 
 <p>Now we substitute these identities in our expression $(\tau_1^2\tau_2-2\tau_2^2)c+(\tau_2)c^3$ and obtain
-\(c^{3} (\sigma_1^{2} - 2 \sigma_2) + c^{2} (- \sigma_1^{3} + 2 \sigma_1 \sigma_2) + c (\sigma_1^{2} \sigma_2 - 2 \sigma_2^{2})\)
-Now divide by the polynomial in the third relation, $\sigma_3-\sigma_2c+\sigma_1c^2-c^3$ and obtain:
+\(c^{3} (\sigma_1^{2} - 2 \sigma_2) + c^{2} (- \sigma_1^{3} + 2 \sigma_1 \sigma_2) + c (\sigma_1^{2} \sigma_2 - 2 \sigma_2^{2})\)</p>
+
+<p><strong>Step 5</strong>.
+Now divide by the polynomial in the right-hand side of the third relation, $\sigma_3-\sigma_2c+\sigma_1c^2-c^3$ and obtain the following remainder:
 \(\sigma_1^{2} \sigma_3 - 2 \sigma_2 \sigma_3\)</p>
 <blockquote>
   <p><strong>Follow along:</strong> Verify that indeed<br />
@@ -133,13 +137,13 @@ $\sigma_1^{2} \sigma_3 - 2 \sigma_2 \sigma_3 = a^3bc+b^3ac+c^3ab$. When preparin
 
 <h2 id="magic">Magic?</h2>
 
-<p>The magic in this theorem happens in the third step. After the polynomial division, all terms that contain $c$ vanish. Why does this happen?</p>
+<p>The magic in this theorem happens in the fifth step. After the polynomial division, all terms that contain $c$ vanish. Why does this happen?</p>
 
 <p>Stay tuned, as we verify the correctness of todays algorithm next Monday!</p>
 
 <h2 id="references--literature--further-reading">References / Literature / Further reading</h2>
 
-<p>I am working with the book “Galois theory” by “Harold M. Edwards”. Pages 8-13 contain the fundamental theorem on symmetric polynomials. My interpretation follows the text closely.</p>
+<p>I am working with the book “Galois theory” by Harold M. Edwards. Pages 8-13 contain the fundamental theorem on symmetric polynomials. My interpretation follows the text closely.</p>
 
 </div>
 
